@@ -21,7 +21,8 @@ slt.header("Gemini LLM Application")
 input=slt.text_input("Input :", key='input')
 uploaded_image = slt.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 if uploaded_image is not None:
-    image=slt.image(uploaded_image, caption='Uploaded Image', use_column_width=True)
+    image=Image.open(uploaded_image)
+    slt.image(uploaded_image, caption='Uploaded Image', use_column_width=True)
 submit=slt.button("Tell me about the image")
 
 if submit:
