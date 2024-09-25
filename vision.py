@@ -19,9 +19,9 @@ def get_gemini_response(input,image):
 slt.set_page_config(page_title="Gemini Image Demo")
 slt.header("Gemini LLM Application")
 input=slt.text_input("Input :", key='input')
-uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+uploaded_image = slt.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 if uploaded_image is not None:
-    st.image(uploaded_image, caption='Uploaded Image', use_column_width=True)
+    slt.image(uploaded_image, caption='Uploaded Image', use_column_width=True)
 submit=slt.button("Tell me about the image")
 
 if submit:
