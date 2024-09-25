@@ -25,7 +25,7 @@ if uploaded_image is not None:
 submit=slt.button("Tell me about the image")
 
 if submit:
-  response=get_gemini_response(input, image)
+  response=get_gemini_response(input,image)
   slt.subheader("The respose is")
   slt.write(response)
   
