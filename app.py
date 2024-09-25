@@ -10,7 +10,7 @@ model=genai.GenerativeModel("gemini-pro")
 
 def get_gemini_response(question):
     response=model.generate_content(question)
-    return response
+    return response.txt
 
 slt.set_page_config(page_title="Q&A Demo")
 slt.header("Gemini LLM Application")
