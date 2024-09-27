@@ -16,7 +16,7 @@ def get_gemini_response(question):
 slt.set_page_config(page_title="Q&A Demo")
 slt.header("Gemini LLM Application")
 
-if 'chat_history' not in session_state:
+if 'chat_history' not in slt.session_state:
   slt.session_state['chat_history'] = []
 
 input=slt.text_input("Input :", key="input")
