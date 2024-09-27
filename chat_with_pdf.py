@@ -55,7 +55,7 @@ def user_input(user_question):
     {"input_documents":docs, "question":user_question},
     return_only_outputs=True)
   print(response)
-  st.write("Reply:", response["output_text"]
+  slt.write("Reply:", response["output_text"])
 
 def main():
   slt.set_page_config("Chat With Multiple PDFs")
