@@ -47,7 +47,7 @@ if uploaded_image is not None:
     image = handle_uploaded_image(uploaded_image)
     if image is not None:
         st.image(uploaded_image, caption='Uploaded Invoice', use_column_width=True)
-        submit = st.button("Tell me about the invoice")
+submit = st.button("Tell me about the invoice")
 
 if submit:
     response = get_gemini_response(input_prompt, image)
