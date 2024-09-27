@@ -5,7 +5,6 @@ import os
 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import google.generativeai as genai
-pip install -U langchain-community
 from langchain.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGeneratieAI
 from langchain.chains.question_answering import load_qa_chain
@@ -73,7 +72,7 @@ def main():
         text_chunks=get_text_chunks(raw_text)
         get_vector_store(text_chunks)
         slt.success("Done")
-
+        user_input(user_question)
 
 
 
