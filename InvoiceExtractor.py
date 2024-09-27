@@ -11,7 +11,7 @@ genai.configure(api_key='GOOGLE_API_KEY')
 model=genai.GenerativeModel('google-1.5-flash')
 
 def get_gemini_response(input,image,prompt):
-  response=model.generate_content(input,image[0], prompt)
+  response=model.generate_content(input,image, prompt)
   return response.text
 
 def input_image_details(uploaded_image):
@@ -42,8 +42,8 @@ You are an expert in understanding the invoices. We will upload a image of invoi
 and you will have to answer any questions based on the uploaded invoice image
 """
 if submit:
-  image_data=input_image_details(uploaded_image)
-  response=get_gemini_response(input_prompt, image_data, input)
+  # image_data=input_image_details(uploaded_image)
+  response=get_gemini_response(input_prompt,image, input)
   slt.subheader('The response is')
   slt.write(response)
 
