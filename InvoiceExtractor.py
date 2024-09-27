@@ -11,7 +11,7 @@ model = genai.GenerativeModel('google-1.5-flash')
 
 def get_gemini_response(input_prompt, image):
     try:
-        response = model.generate_content(input_prompt, image=image)
+        response = model.generate_content(input_prompt, image)
         return response.text
     except Exception as e:
         st.error(f"An error occurred: {e}")
