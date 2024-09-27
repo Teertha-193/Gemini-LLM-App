@@ -1,6 +1,6 @@
 import streamlit as slt
 from PyPDF2 import PdfReader
-from langchain.text.splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
 
 from langchain.google.genai import GoogleGenerativeAIEmbeddings
