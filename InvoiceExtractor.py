@@ -9,9 +9,9 @@ from PIL import Image
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel('google-1.5-flash')
 
-def get_gemini_response(input_prompt, image, input_text):
+def get_gemini_response(input_prompt, image):
     try:
-        response = model.generate_content(input_prompt, image=image, text=input_text)
+        response = model.generate_content(input_prompt, image=image)
         return response.text
     except Exception as e:
         st.error(f"An error occurred: {e}")
@@ -40,7 +40,7 @@ You are an expert in understanding the invoices. We will upload a image of invoi
 and you will have to answer any questions based on the uploaded invoice image
 """
 
-input_text = st.text_input("Input Prompt:", key='input')
+# input_text = st.text_input("Input Prompt:", key='input')
 uploaded_image = st.file_uploader("Choose the image of invoice ", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
@@ -50,7 +50,7 @@ if uploaded_image is not None:
         submit = st.button("Tell me about the invoice")
 
 if submit:
-    response = get_gemini_response(input_prompt, image, input_text)
+    response = get_gemini_response(input_prompt, image)
     if response:
         st.subheader('The response is')
         st.write(response)
