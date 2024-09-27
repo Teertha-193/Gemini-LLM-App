@@ -19,7 +19,7 @@ def input_image_setup(uploaded_image):
     byte_data = uploaded_image.getvalue()
     image_parts = [
       {
-        "mime_type":uploaded_image.type
+        "mime_type": uploaded_image.type,
         "data" : byte_data
       }
     ]
