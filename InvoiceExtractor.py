@@ -27,7 +27,7 @@ def input_image_setup(uploaded_image):
   else:
     raise FileNotFoundError("No file uploaded")
 
-slt.page_config(page_title='Multilingual Invoice Extractor')
+slt.set_page_config(page_title='Multilingual Invoice Extractor')
 slt.header('Multilingual Invoice Extractor')
 
 input = slt.text_input("Input Prompt: ", key='input')
