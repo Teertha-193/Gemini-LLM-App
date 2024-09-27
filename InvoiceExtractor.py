@@ -1,49 +1,56 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-import streamlit as slt
+import streamlit as st
 import os
 import google.generativeai as genai
 from PIL import Image
 
-genai.configure(api_key='GOOGLE_API_KEY')
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+model = genai.GenerativeModel('google-1.5-flash')
 
-model=genai.GenerativeModel('google-1.5-flash')
+def get_gemini_response(input_prompt, image, input_text):
+    try:
+        response = model.generate_content(input_prompt, image=image, text=input_text)
+        return response.text
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        return None
 
-def get_gemini_response(input,image,prompt):
-  response=model.generate_content(input,image, prompt)
-  return response.text
-
-def input_image_details(uploaded_image):
+def handle_uploaded_image(uploaded_image):
   if uploaded_image is not None:
-    byte_data = uploaded_image.getvalue()
-    image_parts = [
-      {
-        "mime_type": uploaded_image.type,
-        "data" : byte_data
-      }
-    ]
-    return image_parts
-  else:
-    raise FileNotFoundError("No file uploaded")
+        allowed_types = ["jpg", "jpeg", "png"]
+        if uploaded_image.type not in allowed_types:
+            st.error(f"Invalid file type. Please upload a jpg, jpeg, or png image.")
+            return None
 
-slt.set_page_config(page_title='Multilingual Invoice Extractor')
-slt.header('Multilingual Invoice Extractor')
+        try:
+            return Image.open(uploaded_image)
+        except Exception as e:
+            st.error(f"Error opening image: {e}")
+            return None
+    else:
+        return None
 
-input = slt.text_input("Input Prompt: ", key='input')
-uploaded_image = slt.file_uploader("Choose the image of invoice ", type=["jpg", "jpeg", "png"])
-if uploaded_image is not None:
-    image=Image.open(uploaded_image)
-    slt.image(uploaded_image, caption='Uploaded Image', use_column_width=True)
-submit=slt.button("Tell me about the invoice")
+st.set_page_config(page_title='Multilingual Invoice Extractor')
+st.header('Multilingual Invoice Extractor')
 
-input_prompt="""
-You are an expert in understanding the invoices. We will upload a image of invoice 
+input_prompt = """
+You are an expert in understanding the invoices. We will upload a image of invoice 
 and you will have to answer any questions based on the uploaded invoice image
 """
-if submit:
-  # image_data=input_image_details(uploaded_image)
-  response=get_gemini_response(input_prompt,image, input)
-  slt.subheader('The response is')
-  slt.write(response)
 
+input_text = st.text_input("Input Prompt:", key='input')
+uploaded_image = st.file_uploader("Choose the image of invoice ", type=["jpg", "jpeg", "png"])
+
+if uploaded_image is not None:
+    image = handle_uploaded_image(uploaded_image)
+    if image is not None:
+        st.image(uploaded_image, caption='Uploaded Invoice', use_column_width=True)
+        submit = st.button("Tell me about the invoice")
+
+if submit:
+    response = get_gemini_response(input_prompt, image, input_text)
+    if response:
+        st.subheader('The response is')
+        st.write(response)
