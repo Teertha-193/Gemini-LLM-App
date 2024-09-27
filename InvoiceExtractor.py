@@ -18,7 +18,7 @@ def get_gemini_response(input_prompt, image):
         return None
 
 def handle_uploaded_image(uploaded_image):
-  if uploaded_image is not None:
+    if uploaded_image is not None:
         allowed_types = ["jpg", "jpeg", "png"]
         if uploaded_image.type not in allowed_types:
             st.error(f"Invalid file type. Please upload a jpg, jpeg, or png image.")
