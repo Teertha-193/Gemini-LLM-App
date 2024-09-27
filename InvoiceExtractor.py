@@ -14,7 +14,7 @@ def get_gemini_response(input,image,prompt):
   response=model.generate_content(input,image[0], prompt)
   return response.text
 
-def input_image_setup(uploaded_image):
+def input_image_details(uploaded_image):
   if uploaded_image is not None:
     byte_data = uploaded_image.getvalue()
     image_parts = [
@@ -42,7 +42,7 @@ You are an expert in understanding the invoices. We will upload a image of invoi
 and you will have to answer any questions based on the uploaded invoice image
 """
 if submit:
-  image_data=input_image-details(uploaded_image)
+  image_data=input_image_details(uploaded_image)
   response=get_gemini_response(input_prompt, image_data, input)
   slt.subheader('The response is')
   slt.write(response)
