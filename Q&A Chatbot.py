@@ -1,11 +1,11 @@
-from dotenv import load-dotenv
+from dotenv import load_dotenv
 load_dotenv()
 
 import streamlit as slt
 import os
 import google.generativeai as genai
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model=genai.GenerativeModel("gemini-pro")
 chat=model.start_chat(history=[])
 
@@ -17,7 +17,7 @@ slt.set_page_config(page_title="Q&A Demo")
 slt.header("Gemini LLM Application")
 
 if 'chat_history' not in session_state:
-  slt.session_state['chat_history']=[]
+  slt.session_state['chat_history'] = []
 
 input=slt.text_input("Input :", key="input")
 submit=slt.button("Ask the question")
