@@ -10,7 +10,7 @@ model = genai.GenerativeModel("gemini-pro")
 chat = model.start_chat(history=[])
 
 def get_gemini_response(question, chat_history):
-    response = chat.send_message(question, stream=True, context=chat_history)
+    response = chat.send_message(question, stream=True)
     return response
 
 st.set_page_config(page_title="Q&A Demo")
